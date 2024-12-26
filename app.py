@@ -890,7 +890,7 @@ function() {
 current_account = account_hf()
 print(f"current_account={current_account}")
 
-with gr.Blocks(elem_id="app", theme=theme, css=css, fill_width=True) as demo:
+with gr.Blocks(elem_id="app", theme=theme, css=css, fill_width=True, title="Flux Gym") as demo:
     with gr.Tabs() as tabs:
         with gr.TabItem("Gym"):
             output_components = []
