@@ -1116,4 +1116,10 @@ with gr.Blocks(elem_id="app", theme=theme, css=css, fill_width=True, title="Flux
     refresh.click(update, inputs=listeners, outputs=[train_script, train_config, dataset_folder])
 if __name__ == "__main__":
     cwd = os.path.dirname(os.path.abspath(__file__))
-    demo.launch(debug=True, show_error=True, allowed_paths=[cwd])
+    launch_args = {}
+    from pathlib import Path
+    if Path("/run/secrets/ssl-certfile").exists():
+        launch_args['ssl_certfile']="/run/secrets/ssl-certfile"
+    if Path("/run/secrets/ssl-keyfile").exists():
+        launch_args['ssl_keyfile']="/run/secrets/ssl-keyfile"
+    demo.launch(debug=True, show_error=True, allowed_paths=[cwd], ssl_verify=False, **launch_args)
