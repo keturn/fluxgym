@@ -39,6 +39,7 @@ RUN rm ./requirements.txt
 
 #Run application as non-root
 USER appuser
+RUN mkdir ~/.cache
 
 # Copy fluxgym application code
 COPY . ./fluxgym

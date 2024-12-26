@@ -1,0 +1,6 @@
+[Build]
+File=/PATH/TO/YOUR/fluxgym/Dockerfile.cuda12.4
+ImageTag=localhost/fluxgym
+#Pull=newer
+PodmanArgs=--device=nvidia.com/gpu=all
+SetWorkingDirectory=file

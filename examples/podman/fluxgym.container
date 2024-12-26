@@ -1,0 +1,24 @@
+[Container]
+Volume=/PATH/TO/YOUR/fluxgym:/app/fluxgym
+Volume=/PATH/TO/YOUR/huggingface:/home/appuser/.cache/huggingface
+Volume=/etc/localtime:/etc/localtime:ro
+Volume=/etc/timezone:/etc/timezone:ro
+
+# mapping here is container ID : @host ID
+UserNS=auto:uidmapping=1000:@1000:1,gidmapping=1000:@1000:1
+PublishPort=0.0.0.0:7860:7860
+
+# to enable SSL in invokeai.yaml, add to it:
+#   ssl_certfile: /run/secrets/ssl-certfile
+#   ssl_keyfile: /run/secrets/ssl-keyfile
+Secret=ssl-certfile,uid=1000,gid=1000
+Secret=ssl-keyfile,uid=1000,gid=1000
+
+### Things that don't need customizing:
+
+Image=fluxgym.build
+# configure with nvidia-ctk as per https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/cdi-support.html#generating-a-cdi-specification
+AddDevice=nvidia.com/gpu=all
+
+[Service]
+Restart=always
